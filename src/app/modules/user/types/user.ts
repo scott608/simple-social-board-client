@@ -1,8 +1,3 @@
-export interface LoginDto {
-  account: string;
-  password: string;
-}
-
 export interface RegisterDto {
   account: string;
   password: string;
