@@ -9,13 +9,24 @@ const api = axios.create({
   }
 });
 
-// 可選：加入攔截器（例如附加 token、自動轉錯誤）
 api.interceptors.request.use(config => {
   const token = localStorage.getItem("token");
+  // 如果token存在，則將其添加到請求header中
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // 驗證過期的話自動導向登入頁
+    if (error.response?.status === 401) {
+      window.location.href = "/auth/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

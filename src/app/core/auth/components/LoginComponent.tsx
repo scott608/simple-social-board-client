@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LoginComponent({
   account,
@@ -67,6 +68,12 @@ export default function LoginComponent({
                 登入
               </button>
             </div>
+            <Link to="/auth/register" className="mt-10 text-center text-sm/6 text-gray-500">
+              還不是會員?{' '}
+              <a className="font-semibold text-indigo-600 hover:text-indigo-500">
+                點此註冊
+              </a>
+            </Link >
           </form>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { login } from "../services/authApi";
-import { LoginDto } from "../types/auth";
-import LoginComponent from "../components/Login.component";
+import LoginComponent from "../components/LoginComponent";
 import { useNavigate } from "react-router-dom";
+import { LoginDto } from "../types/LoginDto";
 
 export default function Login() {
   const [account, setAccount] = useState("");
@@ -16,7 +16,7 @@ export default function Login() {
     try {
       const res = await login(payload);
       if (res.data.success) {
-        // 記錄登入者 token
+        // 記錄登入者 token，存localStorage 風險較高(xss攻擊)，實際專案中建議使用 cookie
         localStorage.setItem("token", res.data.data); 
         // alert("登入成功，歡迎 " + res.data.data);
         navigate("/home"); // ✅ 登入成功後跳轉
