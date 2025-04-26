@@ -3,6 +3,7 @@ import UserRouter from "@modules/user/UserRouter";
 import AuthRouter from "./core/auth/AuthRouter";
 import HomeRouter from "@modules/home/HomeRouter";
 import DefaultLayout from "./layouts/DefaultLayout";
+import NotFoundPage from "@modules/common/pages/NotFoundPage";
 
 export default function AppRouter() {
   return (
@@ -15,9 +16,9 @@ export default function AppRouter() {
           <Route path="/home/*" element={<HomeRouter />} />
         </Route>
 
-        <Route path="/user/*" element={<UserRouter />} />
-        <Route path="/home/*" element={<HomeRouter />} />
         <Route path="/auth/*" element={<AuthRouter />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
