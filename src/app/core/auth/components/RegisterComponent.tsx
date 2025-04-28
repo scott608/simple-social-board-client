@@ -143,9 +143,9 @@ export default function RegisterComponen({
             </div>
             <Link to="/auth/login" className="mt-10 text-center text-sm/6 text-gray-500">
               已有帳戶?{' '}
-              <a className="font-semibold text-indigo-600 hover:text-indigo-500">
+              <span className="font-semibold text-indigo-600 hover:text-indigo-500">
                 點此登入
-              </a>
+              </span>
             </Link >
           </form>
         </div>

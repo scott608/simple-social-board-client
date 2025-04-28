@@ -12,6 +12,7 @@ import {
 import { Bars3Icon,ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/16/solid';
 import { useState } from 'react'
 import { ArrowPathIcon, ChartPieIcon, CursorArrowRaysIcon, FingerPrintIcon, SquaresPlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -31,14 +32,14 @@ export default function Header() {
         <header className="bg-white">
           <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div className="flex lg:flex-1">
-              <a href="#" className="-m-1.5 p-1.5">
+              <Link to="home" className="-m-1.5 p-1.5" >
                 <span className="sr-only">Your Company</span>
                 <img
                   alt=""
                   src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                   className="h-8 w-auto"
                 />
-              </a>
+              </Link>
             </div>
             <div className="flex lg:hidden">
               <button
