@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 建立 axios 實例
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5182", // 你後端的 base URL
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:18080",
   timeout: 10000, // 請求逾時設定（毫秒）
   headers: {
     "Content-Type": "application/json"
