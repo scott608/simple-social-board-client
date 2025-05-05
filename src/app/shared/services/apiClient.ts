@@ -1,14 +1,20 @@
+import { apiErrorInstance } from "@shared/interceptors/apiErrorInstance";
 import axios from "axios";
 
 // 建立 axios 實例
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:18080",
-  timeout: 10000, // 請求逾時設定（毫秒）
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  timeout: import.meta.env.VITE_API_TIMEOUT, // 請求逾時設定（毫秒）
   headers: {
     "Content-Type": "application/json"
   }
 });
 
+
+/**攔截器**/
+
+
+// 添加 token 到請求header
 api.interceptors.request.use(config => {
   const token = localStorage.getItem("token");
   // 如果token存在，則將其添加到請求header中
@@ -18,15 +24,7 @@ api.interceptors.request.use(config => {
   return config;
 });
 
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // 驗證過期的話自動導向登入頁
-    if (error.response?.status === 401) {
-      window.location.href = "/auth/login";
-    }
-    return Promise.reject(error);
-  }
-);
+// errors攔截器
+apiErrorInstance(api);
 
 export default api;
