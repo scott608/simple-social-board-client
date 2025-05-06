@@ -5,7 +5,7 @@ export default function AuthRouter() {
     return (
         <Routes>
 
-            <Route path="auth" element={<Login />} />
+            <Route path="login" element={<Login />} />
 
         </Routes>
     );
