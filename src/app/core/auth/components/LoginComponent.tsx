@@ -1,83 +1,80 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// import React from 'react';
+// import { Link } from 'react-router-dom';
 
-export default function LoginComponent({
-  account,
-  password,
-  setAccount,
-  setPassword,
-  onSubmit
-}: {
-  account: string;
-  password: string;
-  setAccount: (value: string) => void;
-  setPassword: (value: string) => void;
-  onSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}) {
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+
+export default function LoginComponent(
+  {
+    account,
+    password,
+    setAccount,
+    setPassword,
+    onSubmit
+  }: {
+    account: string;
+    password: string;
+    setAccount: (value: string) => void;
+    setPassword: (value: string) => void;
+    onSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  }
+) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            登入您的帳戶
-          </h2>
-        </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
-            <div>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  value={account}
-                  placeholder="帳號"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={(e) => setAccount(e.target.value)}
-                />
+    // Container 是 Bootstrap 的一個組件，用於創建一個響應式的容器
+    // 這個容器會根據屏幕大小自動調整其寬度和邊距
+    <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+      {/* Row 是 Bootstrap 的一個組件，用於創建一個行 */}
+      {/* Row 組件會自動處理行內的列的排列和對齊   */}
+      <Row className="w-100 justify-content-center">
+        {/* Col 是 Bootstrap 的一個組件，用於創建一個列 */}
+        {/* Col 組件會自動處理列的寬度和對齊 */}
+        {/* xs, md,.. 是 Bootstrap 的響應式類別，用於控制列在不同屏幕大小下的寬度 12為整行*/}
+        <Col xs={12} sm={9} md={6} lg={5} xl={4} xxl={3}>
+          <Card className="p-4 shadow">
+            <Card.Body>
+              <h2 className="text-center mb-4">登入您的帳戶</h2>
+              <Form >
+                <Form.Group className="mb-3" controlId="formAccount">
+                  <Form.Control
+                    type="text"
+                    placeholder="帳號"
+                    required
+                    value={account}
+                    onChange={(e) => setAccount(e.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formPassword">
+                  <Form.Control
+                    type="password"
+                    placeholder="密碼"
+                    required
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Group>
+
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-100"
+                  onClick={onSubmit}>
+                  登入
+                </Button>
+              </Form>
+
+              <div className="text-center mt-4">
+                <span className="text-muted">還不是會員？ </span>
+                <Link to="/auth/register">點此註冊</Link>
               </div>
-            </div>
-
-            <div>
-              {/* <div className="flex items-center justify-between">
-        <div className="text-sm">
-              <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-               忘記密嗎？
-              </a>
-            </div>
-          </div> */}
-              <div className="mt-2">
-                <input
-                  type="password"
-                  value={password}
-                  placeholder="密碼"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                onClick={onSubmit}
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
-
-                登入
-              </button>
-            </div>
-            <Link to="/auth/register" className="mt-10 text-center text-sm/6 text-gray-500">
-              還不是會員?{' '}
-              <span className="font-semibold text-indigo-600 hover:text-indigo-500">
-                點此註冊
-              </span>
-            </Link >
-          </form>
-        </div>
-      </div>
-    </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   )
 
 }
