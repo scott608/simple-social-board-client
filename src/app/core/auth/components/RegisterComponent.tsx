@@ -35,7 +35,7 @@ export default function RegisterComponen({
   return (
     <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
       <Row className="w-100 justify-content-center">
-        <Col xs={12} md={6} lg={4}>
+        <Col xs={12} sm={9} md={6} lg={4}>
           <Card className="p-4 shadow">
             <Card.Body>
               <h2 className="text-center mb-4">註冊會員</h2>
