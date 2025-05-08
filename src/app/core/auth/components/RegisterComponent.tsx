@@ -1,5 +1,6 @@
 import { Gender } from '@shared/types/enum/Gender';
 import React from 'react';
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function RegisterComponen({
@@ -32,125 +33,114 @@ export default function RegisterComponen({
   onSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            註冊會員
-          </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
-            <div>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  value={name}
-                  placeholder="姓名"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-            </div>
-            <div>
-              <div className="mt-2">
-                <input
-                  type="email"
-                  value={email}
-                  placeholder="信箱"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="mt-2">
-              <div className="flex justify-between gap-4">
-                <label className="flex items-center w-1/2 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-base text-gray-900 cursor-pointer hover:border-indigo-500 focus-within:outline-2 focus-within:outline-indigo-600 sm:text-sm/6">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="Male"
-                    checked={gender === 'Male'}
-                    onChange={(e) => setGender(e.target.value as Gender)}
-                    className="mr-2 text-indigo-600 focus:ring-indigo-500"
+    <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+      <Row className="w-100 justify-content-center">
+        <Col xs={12} md={6} lg={4}>
+          <Card className="p-4 shadow">
+            <Card.Body>
+              <h2 className="text-center mb-4">註冊會員</h2>
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    type="text"
+                    placeholder="姓名"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                   />
-                  男
-                </label>
+                </Form.Group>
 
-                <label className="flex items-center w-1/2 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-base text-gray-900 cursor-pointer hover:border-indigo-500 focus-within:outline-2 focus-within:outline-indigo-600 sm:text-sm/6">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="Female"
-                    checked={gender === 'Female'}
-                    onChange={(e) => setGender(e.target.value as Gender)}
-                    className="mr-2 text-indigo-600 focus:ring-indigo-500"
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    type="email"
+                    placeholder="信箱"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
-                  女
-                </label>
-              </div>
-            </div>
+                </Form.Group>
 
-            <div>
-              <div className="mt-2">
-                <input
-                  type="date"
-                  value={birthday}
-                  placeholder="生日"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={(e) => setBirthday(e.target.value)}
-                />
-              </div>
-            </div>
-            <div>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  value={account}
-                  placeholder="帳號"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={(e) => setAccount(e.target.value)}
-                />
-              </div>
-            </div>
+                <Form.Group className="mb-3">
+                  <div className="d-flex justify-content-between">
+                    <div className="btn-group w-100" role="group" aria-label="性別">
+                      <input
+                        type="radio"
+                        className="btn-check"
+                        name="gender"
+                        id="genderMale"
+                        value="Male"
+                        checked={gender === 'Male'}
+                        onChange={(e) => setGender(e.target.value as Gender)}
+                      />
+                      <label className="btn btn-outline-primary w-50" htmlFor="genderMale">
+                        男性
+                      </label>
 
-            <div>
-              <div className="mt-2">
-                <input
-                  type="password"
-                  value={password}
-                  placeholder="密碼"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
+                      <input
+                        type="radio"
+                        className="btn-check"
+                        name="gender"
+                        id="genderFemale"
+                        value="Female"
+                        checked={gender === 'Female'}
+                        onChange={(e) => setGender(e.target.value as Gender)}
+                      />
+                      <label className="btn btn-outline-primary w-50" htmlFor="genderFemale">
+                        女性
+                      </label>
+                    </div>
+                  </div>
+                </Form.Group>
 
-            <div>
-              <button
-                type="submit"
-                onClick={onSubmit}
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
-                點此註冊
-              </button>
-            </div>
-            <Link to="/auth/login" className="mt-10 text-center text-sm/6 text-gray-500">
-              已有帳戶?{' '}
-              <span className="font-semibold text-indigo-600 hover:text-indigo-500">
-                點此登入
-              </span>
-            </Link >
-          </form>
-        </div>
-      </div>
-    </div>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    type="date"
+                    placeholder="生日"
+                    value={birthday}
+                    onChange={(e) => setBirthday(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    type="text"
+                    placeholder="帳號"
+                    value={account}
+                    onChange={(e) => setAccount(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-4">
+                  <Form.Control
+                    type="password"
+                    placeholder="密碼"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    autoComplete="current-password"
+                  />
+                </Form.Group>
+
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-100"
+                  onClick={onSubmit}>
+                  點此註冊
+                </Button>
+
+                <div className="text-center mt-4">
+                  <span className="text-muted">已有帳戶？</span>{' '}
+                  <Link to="/auth/login">點此登入</Link>
+                </div>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   )
 
 }
