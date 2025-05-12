@@ -1,0 +1,13 @@
+.navbar-height {
+  height: 60px;
+}
+
+.sidebar {
+  top: 60px;
+  height: calc(100vh - 60px);
+
+  .sidebar-height {
+    overflow-y: auto;
+    height: 100%;
+  }
+}

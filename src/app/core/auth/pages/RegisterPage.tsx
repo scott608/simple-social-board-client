@@ -9,7 +9,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [gender, setGender] = useState<Gender>("Male");
+  const [gender, setGender] = useState<Gender>(0);
   const [birthday, setBirthday] = useState("");
   const payload: RegisterDto = { 
     account, 

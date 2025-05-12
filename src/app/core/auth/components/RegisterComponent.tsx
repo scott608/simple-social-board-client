@@ -22,7 +22,7 @@ export default function RegisterComponen({
   password: string;
   name: string;
   email: string;
-  gender: string;
+  gender: Gender;
   birthday: string;
   setAccount: (value: string) => void;
   setPassword: (value: string) => void;
@@ -68,9 +68,9 @@ export default function RegisterComponen({
                         className="btn-check"
                         name="gender"
                         id="genderMale"
-                        value="Male"
-                        checked={gender === 'Male'}
-                        onChange={(e) => setGender(e.target.value as Gender)}
+                        value="0"
+                        checked={gender === 0}
+                        onChange={(e) => setGender(Number(e.target.value) as Gender)}
                       />
                       <label className="btn btn-outline-primary w-50" htmlFor="genderMale">
                         男性
@@ -81,9 +81,9 @@ export default function RegisterComponen({
                         className="btn-check"
                         name="gender"
                         id="genderFemale"
-                        value="Female"
-                        checked={gender === 'Female'}
-                        onChange={(e) => setGender(e.target.value as Gender)}
+                        value="1"
+                        checked={gender === 1}
+                        onChange={(e) => setGender(Number(e.target.value) as Gender)}
                       />
                       <label className="btn btn-outline-primary w-50" htmlFor="genderFemale">
                         女性
