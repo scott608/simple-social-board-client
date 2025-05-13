@@ -9,5 +9,34 @@
   .sidebar-height {
     overflow-y: auto;
     height: 100%;
+
+
+  }
+}
+
+.sidebar-item {
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 44px;
+  font-size: 13px;
+  border: none; // 移除 ListGroup 預設 border
+
+  &:hover {
+    background-color: #e4e6eb;
+    cursor: pointer;
+  }
+
+  &.active {
+    background-color: #d8dadf;
+    font-weight: bold;
+  }
+
+  .sidebar-icon {
+    font-size: 20px;
+    color: #1877f2;
+  }
+
+  .sidebar-label {
+    color: #050505;
   }
 }

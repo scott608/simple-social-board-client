@@ -21,9 +21,9 @@ export default function ChatEntityList({ items }: ContactListProps) {
         <Card className="border-0 shadow-none">
             <ListGroup variant="flush">
                 {items.map((item) => (
-                    <ListGroup.Item key={item.id} className="border-0 d-flex align-items-center gap-2">
+                    <ListGroup.Item key={item.id} className="sidebar-item border-0 d-flex align-items-center gap-2">
                         {/* 在線狀態 */}
-                        <div className="position-relative">
+                        <div className="sidebar-icon  position-relative">
                             <AvatarOrIcon
                                 imgSrc={item.avatar}
                                 icon={item.icon || BsPersonFill}
@@ -36,7 +36,7 @@ export default function ChatEntityList({ items }: ContactListProps) {
                                 />
                             )}
                         </div>
-                        <span className="fw-semibold">{item.name}</span>
+                        <span className="sidebar-label fw-semibold">{item.name}</span>
                     </ListGroup.Item>
                 ))}
             </ListGroup>
