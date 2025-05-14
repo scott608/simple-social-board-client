@@ -1,4 +1,5 @@
 import { apiErrorInstance } from "@shared/interceptors/apiErrorInstance";
+import { getToken } from "app/core/auth/utils/token";
 import axios from "axios";
 
 // 建立 axios 實例
@@ -16,7 +17,7 @@ const api = axios.create({
 
 // 添加 token 到請求header
 api.interceptors.request.use(config => {
-  const token = localStorage.getItem("token");
+  const token = getToken();
   // 如果token存在，則將其添加到請求header中
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;

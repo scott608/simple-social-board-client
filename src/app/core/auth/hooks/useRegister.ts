@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { register } from "../services/authService";
+import { registerApi } from "../services/authService";
 import { RegisterDto } from "../types/RegisterDto";
 import toast from "react-hot-toast";
 
@@ -9,7 +9,7 @@ export function useRegister() {
 
   return async (registerDto: RegisterDto) => {
     try {
-      const res = await register(registerDto);
+      const res = await registerApi(registerDto);
       if (res.data.success) {
         toast.success("註冊成功，請登入");
         navigate("/auth/login");

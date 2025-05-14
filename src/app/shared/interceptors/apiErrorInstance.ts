@@ -1,3 +1,4 @@
+import { removeToken } from 'app/core/auth/utils/token';
 import type { AxiosInstance, AxiosError } from 'axios';
 import { toast } from 'react-hot-toast';
 
@@ -15,7 +16,7 @@ export function apiErrorInstance(api: AxiosInstance): void {
       //Token 過期
       if (error.response?.status === 401) {
         toast.error('登入已過期，請重新登入');
-        localStorage.removeItem('token'); 
+        removeToken(); 
         window.location.href = '/auth/login';
         return Promise.reject(error);
       }

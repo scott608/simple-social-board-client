@@ -33,7 +33,7 @@ export default function LoginComponent(
             <Card.Body>
               <h2 className="text-center mb-4">登入您的帳戶</h2>
               <Form >
-                <Form.Group className="mb-3" controlId="formAccount">
+                <Form.Group className="mb-3">
                   <Form.Label htmlFor="account" visuallyHidden>帳號</Form.Label>
                   <Form.Control
                     id="account"
@@ -45,7 +45,7 @@ export default function LoginComponent(
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formPassword">
+                <Form.Group className="mb-3">
                   <Form.Label htmlFor="password" visuallyHidden>密碼</Form.Label>
                   <Form.Control
                     id="password"
