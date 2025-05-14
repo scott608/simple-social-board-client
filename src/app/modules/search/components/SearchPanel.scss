@@ -1,0 +1,16 @@
+.search-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  max-height: 80vh;
+  background-color: white;
+  overflow-y: auto;
+  z-index: 1050;
+  transition: max-height 0.3s  ease;
+}
+
+.search-content {
+  max-height: calc(100vh - 56px); /* 減去 header 高度 */
+  overflow-y: auto;
+}
