@@ -86,7 +86,7 @@ export default function RegisterComponent({
                         type="radio"
                         className="btn-check"
                         id="genderMale"
-                        value="0"
+                        value={0}
                         {...register('gender')}
                       />
                       <label className="btn btn-outline-primary w-50" htmlFor="genderMale">
@@ -97,7 +97,7 @@ export default function RegisterComponent({
                         type="radio"
                         className="btn-check"
                         id="genderFemale"
-                        value="1"
+                        value={1}
                         {...register('gender')}
                       />
                       <label className="btn btn-outline-primary w-50" htmlFor="genderFemale">
