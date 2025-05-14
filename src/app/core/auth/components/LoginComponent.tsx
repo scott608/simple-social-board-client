@@ -1,10 +1,7 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-
+//未使用 yup 定義驗證規則
 export default function LoginComponent(
   {
     account,
@@ -37,7 +34,9 @@ export default function LoginComponent(
               <h2 className="text-center mb-4">登入您的帳戶</h2>
               <Form >
                 <Form.Group className="mb-3" controlId="formAccount">
+                  <Form.Label htmlFor="account" visuallyHidden>帳號</Form.Label>
                   <Form.Control
+                    id="account"
                     type="text"
                     placeholder="帳號"
                     required
@@ -47,7 +46,9 @@ export default function LoginComponent(
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formPassword">
+                  <Form.Label htmlFor="password" visuallyHidden>密碼</Form.Label>
                   <Form.Control
+                    id="password"
                     type="password"
                     placeholder="密碼"
                     required

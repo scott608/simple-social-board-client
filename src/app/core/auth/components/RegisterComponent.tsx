@@ -1,37 +1,46 @@
-import { Gender } from '@shared/types/enum/Gender';
-import React from 'react';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import * as yup from 'yup';
+import { RegisterDto } from '../types/RegisterDto';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Gender } from '@shared/types/enum/Gender';
 
-export default function RegisterComponen({
-  account,
-  password,
-  name,
-  email,
-  gender,
-  birthday,
-  setAccount,
-  setPassword,
-  setName,
-  setEmail,
-  setGender,
-  setBirthday,
+
+// 使用 yup 定義驗證規則
+const schema = yup.object({
+  account: yup.string()
+    .min(3, '帳號最少 3 字元')
+    .max(16, '帳號最多 16 字元')
+    .required('請輸入帳號'),
+  password: yup.string()
+    .min(6, '密碼至少6位')
+    .required('請輸入密碼'),
+  name: yup.string().required('請輸入姓名'),
+  email: yup.string().email('信箱格式錯誤').required('請輸入信箱'),
+  birthday: yup.string().required('請輸入生日'),
+  gender: yup.number()
+    .oneOf([0, 1], '請選擇性別')
+    .required('請選擇性別'),
+}).required();
+
+
+export default function RegisterComponent({
   onSubmit
 }: {
-  account: string;
-  password: string;
-  name: string;
-  email: string;
-  gender: Gender;
-  birthday: string;
-  setAccount: (value: string) => void;
-  setPassword: (value: string) => void;
-  setName: (value: string) => void;
-  setEmail: (value: string) => void;
-  setGender: (value: Gender) => void;
-  setBirthday: (value: string) => void;
-  onSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
+  onSubmit: ((data: RegisterDto) => void);
 }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      gender: 0, 
+    },
+    resolver: yupResolver(schema),
+  });
   return (
     <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
       <Row className="w-100 justify-content-center">
@@ -39,25 +48,35 @@ export default function RegisterComponen({
           <Card className="p-4 shadow">
             <Card.Body>
               <h2 className="text-center mb-4">註冊會員</h2>
-              <Form>
+              <Form onSubmit={handleSubmit((data) => {
+                const payload: RegisterDto = {
+                  ...data,
+                  gender: Number(data.gender) as Gender,
+                };
+                onSubmit(payload);
+              })} noValidate>
                 <Form.Group className="mb-3">
+                  <Form.Label htmlFor="name" visuallyHidden>姓名</Form.Label>
                   <Form.Control
+                    id="name"
                     type="text"
                     placeholder="姓名"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
+                    {...register('name')}
+                    isInvalid={!!errors.name}
                   />
+                  <Form.Control.Feedback type="invalid">{errors.name?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
+                  <Form.Label htmlFor="email" visuallyHidden>信箱</Form.Label>
                   <Form.Control
+                    id="email"
                     type="email"
                     placeholder="信箱"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    {...register('email')}
+                    isInvalid={!!errors.email}
                   />
+                  <Form.Control.Feedback type="invalid">{errors.email?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -66,11 +85,9 @@ export default function RegisterComponen({
                       <input
                         type="radio"
                         className="btn-check"
-                        name="gender"
                         id="genderMale"
                         value="0"
-                        checked={gender === 0}
-                        onChange={(e) => setGender(Number(e.target.value) as Gender)}
+                        {...register('gender')}
                       />
                       <label className="btn btn-outline-primary w-50" htmlFor="genderMale">
                         男性
@@ -79,11 +96,9 @@ export default function RegisterComponen({
                       <input
                         type="radio"
                         className="btn-check"
-                        name="gender"
                         id="genderFemale"
                         value="1"
-                        checked={gender === 1}
-                        onChange={(e) => setGender(Number(e.target.value) as Gender)}
+                        {...register('gender')}
                       />
                       <label className="btn btn-outline-primary w-50" htmlFor="genderFemale">
                         女性
@@ -93,41 +108,44 @@ export default function RegisterComponen({
                 </Form.Group>
 
                 <Form.Group className="mb-3">
+                  <Form.Label htmlFor="birthday" visuallyHidden>生日</Form.Label>
                   <Form.Control
+                    id="birthday"
                     type="date"
                     placeholder="生日"
-                    value={birthday}
-                    onChange={(e) => setBirthday(e.target.value)}
-                    required
+                    {...register('birthday')}
+                    isInvalid={!!errors.birthday}
                   />
+                  <Form.Control.Feedback type="invalid">{errors.birthday?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
+                  <Form.Label htmlFor="account" visuallyHidden>帳號</Form.Label>
                   <Form.Control
+                    id="account"
                     type="text"
                     placeholder="帳號"
-                    value={account}
-                    onChange={(e) => setAccount(e.target.value)}
-                    required
+                    {...register('account')}
+                    isInvalid={!!errors.account}
                   />
+                  <Form.Control.Feedback type="invalid">{errors.account?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-4">
+                  <Form.Label htmlFor="password" visuallyHidden>密碼</Form.Label>
                   <Form.Control
+                    id="password"
                     type="password"
                     placeholder="密碼"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    {...register('password')}
+                    isInvalid={!!errors.password}
                     autoComplete="current-password"
                   />
+                  <Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
+
                 </Form.Group>
 
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="w-100"
-                  onClick={onSubmit}>
+                <Button type="submit" variant="primary" className="w-100">
                   點此註冊
                 </Button>
 
