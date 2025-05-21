@@ -1,16 +1,36 @@
+body {
+  background-color: #f0f2f5; // Facebook-like background color
+  font-family: Helvetica, Arial, sans-serif; // Common sans-serif font stack
+  margin: 0;
+  padding: 0;
+}
+
 .navbar-height {
-  height: 60px;
+  height: 60px; // Assuming this is the height of the top navbar
 }
 
 .sidebar {
-  top: 60px;
-  height: calc(100vh - 60px);
+  top: 60px; // Should match .navbar-height
+  height: calc(100vh - 60px); // Full viewport height minus navbar
 
   .sidebar-height {
     overflow-y: auto;
     height: 100%;
+    padding-right: 8px; // Space for scrollbar, prevents content overlap
 
+    // Webkit scrollbar styling for a thinner, less obtrusive scrollbar
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
 
+    &::-webkit-scrollbar-thumb {
+      background-color: #bcc0c4; // Facebook-like scrollbar color
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent; // Or #f0f2f5 to match body
+    }
   }
 }
 

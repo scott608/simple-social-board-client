@@ -1,31 +1,32 @@
 import SelectableList from "@shared/components/SelectableList";
 import { SelectableItem } from "@shared/types/SelectableItem";
-import { FaUserFriends } from "react-icons/fa";
+import { FaUserFriends, FaUsers, FaStore, FaTv, FaHistory } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 
-const groups = [
-  { id: 1, name: '測試人員' },
-  { id: 2, name: '朋友', icon: FaUserFriends },
-  // { id: 3, name: '動態回顧', icon: FaClock },
-  // { id: 4, name: '我的珍藏', icon: FaBookmark },
-  // { id: 5, name: '社團', icon: FaUsers },
+const navigationItems = [
+  { id: 1, name: '測試人員' }, // Assuming this is the user's profile
+  { id: 2, name: 'Friends', icon: FaUserFriends },
+  { id: 3, name: 'Groups', icon: FaUsers },
+  { id: 4, name: 'Marketplace', icon: FaStore },
+  { id: 5, name: 'Watch', icon: FaTv },
+  { id: 6, name: 'Memories', icon: FaHistory },
 ];
 
 export default function NavigationComponent() {
   const navigate = useNavigate();
 
   const handleClick = (item: SelectableItem) => {
-
-    // 這裡可以根據 item.id 來決定要跳轉到哪個頁面
-    // 例如跳轉到社團頁面
-    // navigate(`/group/${item.id}`);
     if (item.id === 1) {
       navigate(`/profile`);
+    } else {
+      console.log(`Clicked on ${item.name}`);
+      // For other items, you can implement navigation later
+      // navigate(`/${item.name.toLowerCase()}`);
     }
-
   };
+
   return (
-    <SelectableList items={groups} onItemClick={handleClick} />
+    <SelectableList items={navigationItems} onItemClick={handleClick} />
   );
 }
