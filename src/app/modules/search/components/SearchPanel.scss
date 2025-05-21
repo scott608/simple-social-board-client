@@ -1,16 +1,44 @@
 .search-panel {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 100%;
   left: 0;
-  width: 400px;
+  width: 360px;
   max-height: 80vh;
   background-color: white;
-  overflow-y: auto;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  padding: 12px;
   z-index: 1050;
-  transition: max-height 0.3s  ease;
+  transition: max-height 0.3s ease;
+
+  .panel-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 8px;
+    cursor: pointer;
+  }
 }
 
-.search-content {
-  max-height: calc(100vh - 56px); /* 減去 header 高度 */
-  overflow-y: auto;
+.search-wrapper {
+  position: relative;
+  width: 260px;
+
+  .search-input {
+    display: flex;
+    align-items: center;
+    background-color: #e4e6eb;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: text;
+
+    input {
+      border: none;
+      background: transparent;
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+    }
+  }
 }

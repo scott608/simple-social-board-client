@@ -1,42 +1,48 @@
 import './SearchPanel.scss';
-import { FaArrowLeft } from 'react-icons/fa';
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 import { useRef, useState } from 'react';
+import { FaFacebook, FaSearch } from 'react-icons/fa';
 import { useSearch } from '../hooks/useSearch';
 
-interface Props {
-    onClose: () => void;
-}
 
-export default function SearchPanel({ onClose }: Props) {
+export default function SearchPanel() {
     const panelRef = useRef<HTMLDivElement>(null);
+    const [isIntput, setIsIntput] = useState(false);
+
     const [query, setQuery] = useState('');
     const { results, loading } = useSearch(query);
-
-    useClickOutside(panelRef, onClose);
+    useClickOutside(panelRef, () => {
+        setIsIntput(false);
+    });
 
     return (
-        <div ref={panelRef} className="search-panel shadow">
-            <div className="d-flex justify-content-between align-items-center p-3 border-bottom">
-                <button className="btn btn-light" onClick={onClose}>
-                    <FaArrowLeft size={24} />
-                </button>
-                <input
-                    type="text"
-                    className="form-control me-2"
-                    placeholder="搜尋"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
+        <>
+            <div className="d-flex align-items-center" ref={panelRef}>
+                <FaFacebook color="#1877F2" size={40} className="me-3" />
+                <div className="search-wrapper">
+                    <div className="search-input" onClick={() => setIsIntput(true)}>
+                        <FaSearch color="#65676B" className="me-2" />
+                        <input
+                            type="text"
+                            placeholder="搜尋 Facebook"
+                            onFocus={() => setIsIntput(true)}
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
+                    </div>
+                </div>
+                {isIntput && (
+                    <div className="search-panel">
+                        {loading ? <li>載入中...</li> : results.map(user => (
+                            <div key={user.userId} className="panel-item">
+                                <span>{user.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
-            <div className="search-content px-3 py-2">
-                <ul className="list-unstyled">
-                    {loading ? <li>載入中...</li> : results.map(user => (
-                        <li className="py-2 border-bottom" key={user.userId}>{user.name}</li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+        </>
+
     );
 }
