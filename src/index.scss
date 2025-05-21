@@ -34,6 +34,24 @@ body {
   }
 }
 
+// General styling for icon buttons (can be used by ActionButton or NavLink if needed)
+.icon-button-base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; // Circular background for many FB icons
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #050505; // Default icon color for right section
+  padding: 8px; // Default padding
+
+  &:hover {
+    background-color: #f0f2f5; // Light gray for hover, consistent with FB
+  }
+}
+
+
 .sidebar-item {
   padding-left: 8px;
   padding-right: 8px;
@@ -64,26 +82,60 @@ body {
 
 .nav-icon {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 56px;
-  width: 60px;
-  position: relative;
-  color: #606770;
+  height: 100%; // Fill the navbar height for click area
+  padding: 0 1rem; // Adjust padding as needed, FB uses more padding for wider icons
+  color: #65676B; // Default Facebook icon color (gray)
   text-decoration: none;
+  border-bottom: 3px solid transparent; // For active state indicator
+  border-radius: 0; // Remove bootstrap default radius if any from NavLink being an anchor
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; // Smooth transition
+
+  // Ensure SVG icons inherit color
+  svg {
+    fill: currentColor;
+  }
+
+  &:hover {
+    background-color: #f0f2f5; // Light gray background on hover
+    border-bottom-color: transparent; // Keep border transparent on hover unless active
+    color: #050505; // Darken icon color on hover
+    border-radius: 6px; // Slight rounding on hover for the background
+  }
 
   &.active {
-    color: #1877f2;
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      width: 70%;
-      height: 4px;
-      background-color: #1877f2;
-      border-radius: 2px;
+    color: #0866FF; // Facebook blue for active icon
+    border-bottom-color: #0866FF; // Blue bottom border for active
+    background-color: transparent; // No background color when active, just border and icon color
+    
+    &:hover {
+      background-color: #f0f2f5; // Still apply hover background if desired, FB does this
+      color: #0866FF; // Keep icon blue on hover when active
     }
   }
+
+  // Adjust width/height for the clickable area if icons are different sizes
+  // Facebook's central icons are roughly 48-56px in height and can be wider.
+  // The current `nav-icon` class in `HeaderComponent.tsx` is set to height 56px.
+  // We can use min-width here if we want them to be wider.
+  min-width: 50px; // Minimum width for each icon container
+  max-width: 110px; // Max width, FB icons are around 100-110px wide for the main 5
+  flex-grow: 1; // Allow icons to take up space evenly if Nav container has space
+  height: 48px; // Facebook's central icons hover area height
+  margin: 0 2px; // Small margin between icons
+}
+
+// Ensure the .nav-icon styles in HeaderComponent.tsx for width/height are compatible or removed if this handles it.
+// The inline style 'padding: 0 0.5rem' on NavLink in HeaderComponent.tsx might conflict or be redundant.
+// It's better to manage padding here in SCSS for consistency.
+// Let's assume the 'style={styles.navIconWrapper}' is removed or adjusted.
+
+// Search input specific styling if needed beyond inline styles
+// The inline styles in HeaderComponent.tsx are quite specific already.
+// We can add focus behavior here.
+input[type="search"].form-control:focus {
+  // Facebook's search input doesn't change much on focus, no strong outline
+  box-shadow: none;
+  border-color: transparent; // Keep border transparent
 }
