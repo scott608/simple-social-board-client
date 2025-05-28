@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { setToken } from "../utils/token";
 import { loginApi } from "../services/authService";
 import { useAuth } from "./useAuth";
 
@@ -13,7 +12,6 @@ export function useLogin() {
 
       if (res.data.success) {
         login(res.data.data);
-        setToken(res.data.data);
         navigate('/home');
 
         return { success: true };

@@ -1,6 +1,6 @@
 import { searchAll } from "../services/searchService";
 import { useEffect, useState } from "react";
-import { UserBasicDto } from "@modules/user/types/UserBasicDto";
+import { UserBasicDto } from "@modules/profile/types/UserBasicDto";
 
 
 export function useSearch(query: string) {

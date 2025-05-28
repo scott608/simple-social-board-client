@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode"; 
+
 const TOKEN_KEY = 'token';
 
 
@@ -8,6 +10,7 @@ export function setToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token);
 }
 
+
 export function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
 }
@@ -15,6 +18,7 @@ export function getToken(): string | null {
 export function removeToken() {
   localStorage.removeItem(TOKEN_KEY);
 }
+
 
 /**
  * 檢查 token 是否存在並且未過期
@@ -33,5 +37,22 @@ export function isTokenValid(): boolean {
   } catch (err) {
     console.warn('Invalid token format', err);
     return false;
+  }
+}
+
+export type JwtPayload = {
+  sub: string;
+  account: string;
+  role: string;
+};
+
+export function getUserFromToken(): JwtPayload | null {
+  const token = getToken();
+  if (!token) return null;
+
+  try {
+    return jwtDecode<JwtPayload>(token);
+  } catch {
+    return null;
   }
 }

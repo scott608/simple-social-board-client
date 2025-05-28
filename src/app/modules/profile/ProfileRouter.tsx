@@ -4,7 +4,7 @@ import ProfilePage from "./pages/ProfilePage";
 export default function ProfileRouter() {
   return (
     <Routes>
-      <Route index element={<ProfilePage />} />
+      <Route path=":userId" element={<ProfilePage />} />
 
     </Routes>
   );

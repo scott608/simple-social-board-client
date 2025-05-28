@@ -1,4 +1,4 @@
-import { UserBasicDto } from "@modules/user/types/UserBasicDto";
+import { UserBasicDto } from "@modules/profile/types/UserBasicDto";
 import api from "@services/apiClient";
 import { ApiResponse } from "@shared/types/ApiResponse";
 
