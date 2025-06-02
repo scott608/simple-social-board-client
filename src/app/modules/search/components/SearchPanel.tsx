@@ -26,7 +26,7 @@ export default function SearchPanel() {
     return (
         <>
             <div className="d-flex align-items-center" ref={panelRef}>
-                <FaFacebook color="#1877F2" size={40} className="me-3" />
+                <FaFacebook color="#1877F2" size={40} className="me-3"onClick={() => navigate('/home')}  />
                 <div className="search-wrapper">
                     <div className="search-input" onClick={() => setIsInput(true)}>
                         <FaSearch color="#65676B" className="me-2" />
